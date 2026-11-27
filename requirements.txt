@@ -1,0 +1,9 @@
+# Python 3.12（manim 0.22 要求 ≥ 3.11）。以下为 2026-11-27 出片时的实际版本。
+manim==0.22.1
+edge-tts==7.3.1
+numpy==2.5.5
+matplotlib==3.11.2
+PyYAML==6.0.4
+
+# 只有读音检查工具 video/tools/pron_check.py 需要；不检查读音可以不装
+librosa==1.0.1

@@ -1,0 +1,35 @@
+# 全局读音词典：tts.py 在把每句的 say（没有 say 时用 sub）送进 TTS 之前，按顺序做这些替换。
+# 只影响配音，不影响字幕。新增规则后用 tools/pron_check.py 验证。
+#
+# 每条规则：
+#   from: 原文（普通字符串）
+#   to:   替换后送给 TTS 的写法
+#   regex: true 时 from 按正则解释
+#   why:  原因与验证结果（2026-11-27，zh-CN-YunxiNeural）
+
+rules:
+  - from: '(?i)(?<![A-Za-z])up(?![A-Za-z])'
+    to: Up
+    regex: true
+    why: >-
+      全大写的 UP 会被逐字母读成 U-P；写成 Up/up 时读成英文单词 up（提升）。
+      在“单Up、双Up、4Up、Up角色、Up装扮、Up主”语境下声学比对均判定为英文读法。
+
+  - from: 得先
+    to: 嘚先
+    why: >-
+      “得先歪一次”实测读成 dé，应为 děi。换成同音字“嘚”后判定为 děi。
+      其他语境的“得”（就得、你得）读 de 或 dé 的情况较多，所以只按词替换，不做全局替换。
+
+  # 下列词在当前语境实测读音正确，列在这里只作提醒；如果以后在新语境里读错，再改成同音字替换
+  # （只有 from 没有 to 的条目不做任何替换）。
+  - from: 直觉
+    why: 实测读 jué，正确。
+  - from: 命中
+    why: 实测读 zhòng（四声），正确；“全不中”“没中”也为 zhòng。
+  - from: 第五行
+    why: 实测读 háng，正确。
+  - from: 还差
+    why: 实测读 chà，正确。
+  - from: 长期
+    why: 实测读 cháng，正确。
